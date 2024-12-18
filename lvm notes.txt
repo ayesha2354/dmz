@@ -1,0 +1,25 @@
+=====LVM===== 
+>add disc
+>lsblk
+> pvcreate /dev/sdb
+> vgcreate vg1 /dev/sdb
+> lvcreate -n lv1 -L +2G vg1
+> mkdir /dir1
+> mkfs.xfs /dev/vg1/lv1
+> vim /etc/fstab
+> /dev/vgname/lvname   /dir   xfs  defaults 0 0
+> mount /dir1
+> df -h
+
+=====LV EXTEND=====
+>add disc
+>lsblk
+>pvcreate /dev/sdc
+
+>vgextend vg1 /dev/sdc
+>lvs
+>lvextend -L +2G /dev/vg1/lv1 -r
+>df -h
+
+
+>lvcreate -n lv1 -l +100%FREE vg1
