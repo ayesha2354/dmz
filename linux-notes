@@ -1,0 +1,26 @@
+> yum -y install nfs-utils
+> systemctl enable nfs-server --now
+> firewall-cmd --add-port=2049/tcp --permanent
+> firewall-cmd --add-port=2049/udp --permanent
+> firewall-cmd --add-port=111/tcp --permanent
+> firewall-cmd --add-port=111/udp --permanent
+> firewall-cmd --permanent --add-service=mountd
+> firewall-cmd --reload
+> firewall-cmd --list-all
+> setenforce 0
+> getenforce
+> vim /etc/exports
+/nfsshare 192.168.1.102(rw,sync,no_root_squash)
+> exportfs -a
+
+----------Client configuration-----------
+
+> nfs-utils package
+> showmount -e 192.168.1.101(nfs server)
+> mkdir /nfsshare
+> vim /etc/fstab
+192.168.1.101:/nfsshare /nfsshare nfs defaults 0 0
+> mount /nfsshare
+> df -h /nfsshare
+
+
